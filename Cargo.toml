@@ -3,5 +3,9 @@ name = "somok"
 version = "1.0.0"
 edition = "2021"
 license = "MIT"
+description = "A microlibrary for postfix Option/Result wrapping"
+repository = "https://github.com/JohnDowson/somok"
+readme = "README.md"
+authors = ["Ivan C. <ichinenov@gmail.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
