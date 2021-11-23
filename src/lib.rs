@@ -35,5 +35,21 @@ pub trait Somok: Sized {
     fn some(self) -> Option<Self> {
         Some(self)
     }
+
+    /// Returns self wrapped in a box
+    fn boxed(self) -> Box<Self> {
+        Box::new(self)
+    }
 }
 impl<T: Sized> Somok for T {}
+
+/// Postfix notation for leaking the box
+pub trait Leaksome<T> {
+    /// Leaks the box
+    fn leak(self) -> &'static mut T;
+}
+impl<T> Leaksome<T> for Box<T> {
+    fn leak(self) -> &'static mut T {
+        Box::leak(self)
+    }
+}
