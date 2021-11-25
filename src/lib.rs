@@ -35,6 +35,10 @@ pub trait Somok: Sized {
     fn some(self) -> Option<Self> {
         Some(self)
     }
+    /// Returns boxed self
+    fn boxed(self) -> Box<Self> {
+        Box::new(self)
+    }
 }
 impl<T: Sized> Somok for T {}
 
