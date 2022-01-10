@@ -52,3 +52,20 @@ impl<T: ?Sized> Leaksome<T> for Box<T> {
         Box::leak(self)
     }
 }
+
+/// Fallible `remove()` alternative for Vec
+trait TryRemove {
+    type Item;
+    fn try_remove(&mut self, i: usize) -> Option<Self::Item>;
+}
+impl<T> TryRemove for Vec<T> {
+    type Item = T;
+
+    fn try_remove(&mut self, i: usize) -> Option<Self::Item> {
+        if i < self.len() {
+            self.remove(i).some()
+        } else {
+            None
+        }
+    }
+}
