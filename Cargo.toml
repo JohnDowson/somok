@@ -1,6 +1,6 @@
 [package]
 name = "somok"
-version = "1.1.4"
+version = "1.2.0"
 edition = "2021"
 license = "MIT"
 description = "A microlibrary for postfix Option/Result wrapping"

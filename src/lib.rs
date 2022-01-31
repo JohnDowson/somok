@@ -54,8 +54,10 @@ impl<T: ?Sized> Leaksome<T> for Box<T> {
 }
 
 /// Fallible `remove()` alternative for Vec
-trait TryRemove {
+pub trait TryRemove {
+    /// Type of collection item
     type Item;
+    /// Attempts to `remove` item at index
     fn try_remove(&mut self, i: usize) -> Option<Self::Item>;
 }
 impl<T> TryRemove for Vec<T> {
@@ -70,8 +72,11 @@ impl<T> TryRemove for Vec<T> {
     }
 }
 
-trait CondPop {
+/// Convinience method for conditionally popping from a collection
+pub trait CondPop {
+    /// Type of collection item
     type Item;
+    /// Conditionally pops off an item from collection
     fn cond_pop<F>(&mut self, cond: F) -> Option<Self::Item>
     where
         F: Fn(&Self::Item) -> bool;
