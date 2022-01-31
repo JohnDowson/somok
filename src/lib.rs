@@ -69,3 +69,24 @@ impl<T> TryRemove for Vec<T> {
         }
     }
 }
+
+trait CondPop {
+    type Item;
+    fn cond_pop<F>(&mut self, cond: F) -> Option<Self::Item>
+    where
+        F: Fn(&Self::Item) -> bool;
+}
+impl<T> CondPop for Vec<T> {
+    type Item = T;
+
+    fn cond_pop<F>(&mut self, cond: F) -> Option<Self::Item>
+    where
+        F: Fn(&Self::Item) -> bool,
+    {
+        if let Some(last) = self.last() {
+            cond(last).then(|| self.pop()).flatten()
+        } else {
+            None
+        }
+    }
+}
