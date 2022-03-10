@@ -7,9 +7,9 @@ somok = "1.0"
 ```
 Then use postfix wrapping as follows:
 ```rust
-use somok::Somok;
+use somok::{ Somok, Either };
 
-fn foo() -> Result<Option<String>> {
-    String::from("Foobar").some().okay()
+fn foo() -> Result<Option<Either<String, Vec<u8>>>> {
+    String::from("Foobar").left().some().okay()
 }
 ```

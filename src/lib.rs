@@ -39,6 +39,14 @@ pub trait Somok: Sized {
     fn boxed(self) -> Box<Self> {
         Box::new(self)
     }
+    /// Returns self wrapped in `Either::Left`
+    fn left<R>(self) -> Either<Self, R> {
+        Either::Left(self)
+    }
+    /// Returns self wrapped in `Either::Right`
+    fn right<L>(self) -> Either<L, Self> {
+        Either::Right(self)
+    }
 }
 impl<T: Sized> Somok for T {}
 
@@ -94,4 +102,13 @@ impl<T> CondPop for Vec<T> {
             None
         }
     }
+}
+
+/// Enum representing either of two options
+#[derive(Debug, Clone, Copy)]
+pub enum Either<L, R> {
+    /// Left variant
+    Left(L),
+    /// Right variant
+    Right(R),
 }
